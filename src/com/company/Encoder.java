@@ -1,19 +1,20 @@
 package com.company;
 
+import java.util.Arrays;
 import java.util.Base64;
 
 class Encoder {
-    private Integer[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199};
+    private static int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199};
 
-    String encode(String str) {
+    public static String encode(String str) {
         return split(ttm(str));
     }
 
-    String decode(String str) {
+    public static String decode(String str) {
         return mtt(unsplit(str));
     }
 
-    private String split(String str) {
+    private static String split(String str) {
         StringBuilder ret = new StringBuilder(str.substring(0, primes[0])).append(Integer.parseInt(Integer.toString(primes[0]).substring(0, 1)));
         int a = 1;
         while (sum(a) <= str.length()) {
@@ -24,7 +25,7 @@ class Encoder {
         return ret.toString();
     }
 
-    private String unsplit(String str) {
+    private static String unsplit(String str) {
         StringBuilder ret = new StringBuilder(str.substring(0, primes[0]));
         int a = 1;
         while (sum(a) <= str.length()) {
@@ -35,15 +36,27 @@ class Encoder {
         return ret.toString();
     }
 
-    private String ttm(String str) {
+    /**
+     * դոկումենտացիադ ստեղ գրի
+     *
+     * @param str
+     * @return
+     */
+    private static String ttm(String str) {
         return Base64.getEncoder().encodeToString(str.getBytes());
     }
 
-    private String mtt(String str) {
-        return new String(Base64.getDecoder().decode(str));
+    /**
+     * նույնն էլ ստեղ
+     *
+     * @param str
+     * @return
+     */
+    private static String mtt(String str) {
+        return Arrays.toString(Base64.getDecoder().decode(str));
     }
 
-    private int sum(int a) {
+    private static int sum(int a) {
         int b = 0;
         for (int i = 0; i <= a; i++) {
             b += primes[i % primes.length];
