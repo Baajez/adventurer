@@ -1,0 +1,7 @@
+<characters>
+    <character name="hero">
+        <name>Hero</name>
+        <armor>esinch</armor>
+        <weapon>eninch</weapon>
+    </character>
+</characters>

@@ -1,0 +1,5 @@
+<weapons>
+    <weapon name="sword">
+        <attack>18</attack>
+    </weapon>
+</weapons>
