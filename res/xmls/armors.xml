@@ -1,0 +1,12 @@
+<armorTypes>
+    <armor id="1">
+        <name>Broken Chest Plate</name>
+        <defense>4</defense>
+        <weight>1</weight>
+    </armor>
+    <armor id="2">
+        <name>Blessed Armor</name>
+        <defense>6</defense>
+        <weight>1</weight>
+    </armor>
+</armorTypes>

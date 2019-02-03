@@ -30,11 +30,10 @@ public class XmlObject {
         }
     }
 
-    @Override
-    public String toString() {
+    public String toString(String prefix) {
         String result = "";
         for (String s : details.keySet()) {
-            result += "\n\t" + s + ": " + details.get(s);
+            result += "\n\t" + prefix + s + ": " + details.get(s);
         }
         return result + '\n';
     }

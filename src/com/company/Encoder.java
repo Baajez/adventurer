@@ -3,68 +3,70 @@ package com.company;
 import java.util.Base64;
 
 class Encoder {
-    private static int[] primes = {
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
-            47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103,
-            107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163,
-            167, 173, 179, 181, 191, 193, 197, 199
-    };
+    private static int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199};
 
+    /**
+     * @param str string
+     * @return encoded string
+     */
     public static String encode(String str) {
-        return split(ttm(str));
-    }
-
-    public static String decode(String str) {
-        return mtt(unsplit(str));
-    }
-
-    private static String split(String str) {
-        StringBuilder ret = new StringBuilder(str.substring(0, primes[0])).append(Integer.parseInt(Integer.toString(primes[0]).substring(0, 1)));
-        int a = 1;
-        while (sum(a) <= str.length()) {
-            ret.append(str, primes[(a - 1) % primes.length], primes[a % primes.length]).append(Integer.parseInt(Integer.toString(primes[a % primes.length]).substring(0, 1)));
-            a++;
-        }
-        ret.append(str.substring(primes[(a - 1) % primes.length]));
-        return ret.toString();
-    }
-
-    private static String unsplit(String str) {
-        StringBuilder ret = new StringBuilder(str.substring(0, primes[0]));
-        int a = 1;
-        while (sum(a) <= str.length()) {
-            ret.append(str, a + primes[(a - 1) % primes.length], a + primes[a % primes.length]);
-            a++;
-        }
-        ret.append(str.substring((a - 1) + primes[(a - 1) % primes.length]));
-        return ret.toString();
+        return base64Ecnode(split(str));
     }
 
     /**
-     * դոկումենտացիադ ստեղ գրի
      *
-     * @param str
-     * @return
+     * @param str encoded string
+     * @return decoded string
      */
-    private static String ttm(String str) {
+    public static String decode(String str) {
+        return unsplit(base64Decode(str));
+    }
+
+    /**
+     *
+     * @param str string
+     * @return encoding first step: adding random letters in prime indices
+     */
+    private static String split(String str) {
+        int i = 0;
+        for (int prime : primes) {
+            if (prime + i > str.length()) {
+                return str;
+            }
+            str = str.substring(0, prime + i) + randomise() + str.substring(prime + i);
+            i++;
+        }
+        return str;
+    }
+
+    private static String base64Ecnode(String str) {
         return Base64.getEncoder().encodeToString(str.getBytes());
     }
 
-    /**
-     * նույնն էլ ստեղ
-     *
-     * @param str
-     * @return
-     */
-    private static String mtt(String str) {
+    private static String base64Decode(String str) {
         return new String(Base64.getDecoder().decode(str));
     }
 
-    private static int sum(int a) {
-        int b = 0;
-        for (int i = 0; i <= a; i++) {
-            b += primes[i % primes.length];
+    /**
+     * @param str string
+     * @return decoding second step: removing random letters from prime indices
+     */
+    private static String unsplit(String str) {
+        for (int prime : primes) {
+            if (prime > str.length()) {
+                return str;
+            }
+            str = str.substring(0, prime) + str.substring(prime + 1);
         }
-        return b;
+        return str;
+    }
+
+    /**
+     * @return random letter
+     */
+    private static String randomise() {
+        String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w"};
+        int rand = (int) (Math.random() * 23);
+        return letters[rand];
     }
 }

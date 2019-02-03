@@ -1,7 +1,20 @@
 <characters>
-    <character name="hero">
+    <character id="0">
         <name>Hero</name>
-        <armor>esinch</armor>
-        <weapon>eninch</weapon>
+        <armor>1</armor>
+        <weapon>1</weapon>
+        <friend>true</friend>
+    </character>
+    <character id="1">
+        <name>Gareth</name>
+        <armor>1</armor>
+        <weapon>1</weapon>
+        <friend>true</friend>
+    </character>
+    <character id="2">
+        <name>Kira</name>
+        <armor>1</armor>
+        <weapon>1</weapon>
+        <friend>false</friend>
     </character>
 </characters>

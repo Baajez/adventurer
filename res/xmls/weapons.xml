@@ -1,5 +1,12 @@
 <weapons>
-    <weapon name="sword">
-        <attack>18</attack>
+    <weapon id="1">
+        <name>"Broken Sword"</name>
+        <damage>4</damage>
+        <speed>1</speed>
+    </weapon>
+    <weapon id="2">
+        <name>Blessed Sword</name>
+        <damage>6</damage>
+        <speed>1</speed>
     </weapon>
 </weapons>
